@@ -1,0 +1,1 @@
+# numpy의 숫자 나열 함수 arange와 linspace를 설명하는 파일입니다.
