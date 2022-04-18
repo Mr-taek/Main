@@ -1,0 +1,1 @@
+1. 처음 SQL 설치할 때 비밀번호가 SQL DB에서의 SID비번. 그리고 뭐 SYSTEM 은 ORCL로 되어 있음
