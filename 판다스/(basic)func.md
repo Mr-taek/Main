@@ -4,6 +4,10 @@
 ### python 몇가지 유용한 함수
 1. type() : 인자의 타입을 리턴한다.
 
+1. Series,DataFrame기본
+2. Pandas 함수
+3. DataFrame,Series 공통함수
+
 ### Series, DataFrame 기본
 1. Series : Series객체는 dictionary 객체와 매우 흡사. key와 대응 되는 value가 있음.
     - 특징
@@ -81,7 +85,9 @@
     - type(df['age']) -> Series
     - type(df[['age']]) - > DataFrame
 
-1. pd.loc pd[]
+
+
+
 ### pandas 함수
 1. pandas.cut() : Category, Seriese, or ndarray 타입을 리턴
     - 인자 정보
@@ -161,7 +167,9 @@
         1. (pat='display.max_columns',val=10) # 출력할 최대 10개 열의 개수
            ('display.max_colwidth',20) # 출력할 열의 너비
            ('display.unicode.east_asian_width',True) #유니코드 사용 너비 조정
-
+4. DataFrame,Series 공통, values.tolist(): 
+    1. pd.Data~/Se-.values : 모든 열의 값들을 한 행으로 바꿔서 2차원 numpy 행열로 변경.
+    2. tolist() : 암튼 리스트로 바꿈.
     
 ### DataFrame, Series 공통함수
 0. .loc , .iloc : 사용법은 대충 알고 있으니, 핵심만 설명함.
