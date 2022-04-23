@@ -17,7 +17,7 @@
     1. F1 or CTRL+SHIFT+P
     2. git: create new branch 택
     3. 브랜치 이름정하기.
-# Note , 만약 가상환경설치가 다 됐는데 import 후 해당 lib가 없다면 interpreter을 가상환경의 것으로 바꾸었는 지 체크한다.
+# Note , 만약 가상환경설치가 다 됐는데 import 후 해당 lib가 없다면 interpreter을 가상환경의 것으로 바꾸었는 지 체크한다. 이 오류는 pip의 버전이 맞지 않기 떄문이라고 한다. pip install --upgrade pip 해주면 될 것같은데 안 된다.
 # VS CODE 가상환경 만드는 법과 접속법. 설치할 폴더위치에서 vscode를 run
 - 가상환경 만드는 법 (Through vs code)
     1. CTRL + SHIFT + P 로 우선 python interpreter check, and 가상환경의 python interpreter가 없는 지 체크.
