@@ -45,6 +45,7 @@
 - 가상환경 나가는 법
     1. 가상환경이 켜진 상태에서 deactivate 를 친다.
     2. 그러면 마지막 Path가 Scripts인 상태에 앞에 (~)가 사라진다. 그 상태에서 다시 activate 하면 가상환경에 진입한다.
+# Fatal error in launcher 시 cmd에 python -m pip~ 으로 하면 해결이다.
 # 파일과 github 연동방법
     1. github에서 새로운 나의 repository를 만든다
     2. 해당 repository에 들어가서 code를 누르고 clone에서 해당 repository의 주소를 복사한다.
