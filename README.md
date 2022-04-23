@@ -46,6 +46,7 @@
     1. 가상환경이 켜진 상태에서 deactivate 를 친다.
     2. 그러면 마지막 Path가 Scripts인 상태에 앞에 (~)가 사라진다. 그 상태에서 다시 activate 하면 가상환경에 진입한다.
 # Fatal error in launcher 시 cmd에 python -m pip~ 으로 하면 해결이다.
+# 가상환경에서 library가 sll/ts 것 때문에 설치되지 않는다 에러 : 이 글을 쓰는 시점에선 아나콘다와 vs의 스파이더/파이썬 을 동시에 사용해서 문제가 되었다. 가상환경 폴더에 pyvenv.cfg 을 찾으면 home이 있다. 그곳은 anaconda의 파이썬을 실행시키는 파일인데, 아나콘다를 열면 아마 실행이 될 것이다. 하지만 나는 그게 아님으로 이 주소를 일반 python.exe가 있는 폴더 경로를 써주면 된다. C:/user/anaconda3 에서 c~ \python\python310으로 옮겼더니 설치가 된다.
 # 파일과 github 연동방법
     1. github에서 새로운 나의 repository를 만든다
     2. 해당 repository에 들어가서 code를 누르고 clone에서 해당 repository의 주소를 복사한다.
