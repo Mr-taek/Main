@@ -2,13 +2,25 @@
 # pandas의 인덱스 는 두 가지다. 1. 정수형 위치 인덱스 2. 
 # 슬라이싱을 통한 정수형 인덱스는 끝-1만큼 이고 인덱스 라벨의 슬라이싱은 끝을 포함한다.
 ### python 몇가지 유용한 함수
-1. type() : 인자의 타입을 리턴한다.
 
+# Ctrl+F 로 아래 목차 값 찾아서 가세요 
 1. Series,DataFrame기본
-2. Pandas 함수
-3. DataFrame,Series 공통함수
+2. pandas 함수
+3. DataFrame, Series 공통함수
+4. Series, DataFrame의 행 열, 정보 얻기
+5. 행, 열의 값 정보 얻기 
+6. index 
+7. add,sub,div,sum,mean .. 등 함수
+8. 필터링(매우매우매우 중요!!!!!)
 
-### Series, DataFrame 기본
+
+- type() : 인자의 타입을 리턴한다.
+- Series,DataFrame기본
+- Pandas 함수
+- DataFrame,Series 공통함수
+
+
+# 1. Series, DataFrame 기본
 1. Series : Series객체는 dictionary 객체와 매우 흡사. key와 대응 되는 value가 있음.
     - 특징
         1. dict의 형태와 매우 비슷해서 보통 dict형태 객체를 Series객체로 변환시킨다.
@@ -88,7 +100,7 @@
 
 
 
-### pandas 함수
+# 2. pandas 함수
 1. pandas.cut() : Category, Seriese, or ndarray 타입을 리턴
     - 인자 정보
         1. x = Array-like : input데이터로서 경계를 구분할 값들, 반드시 1차원 데이터(flattend, 1-dimentional data)이어야 함.
@@ -171,7 +183,7 @@
     1. pd.Data~/Se-.values : 모든 열의 값들을 한 행으로 바꿔서 2차원 numpy 행열로 변경.
     2. tolist() : 암튼 리스트로 바꿈.
     
-### DataFrame, Series 공통함수
+# 3. DataFrame, Series 공통함수
 0. .loc , .iloc : 사용법은 대충 알고 있으니, 핵심만 설명함.
     1. .loc[0:4,'aa':'bb] : 분명 숫자는 안 된다고 알고 있지만, 인덱스가 int형이라면 상관없음. 더불어 슬라이싱이라도 마지막 범위의 값이 포함됨.
 1. (Seriese 전용) Seriese obj.fillna(arg) : nan값을 특정 값으로 채워주는 함수
@@ -244,7 +256,11 @@
     - 인자
         1. axis=0(default)/1 : 행또는 열중 삭제할 것
         2. labels=Single/list-like RowIndexORcolumn index : 제거할 행 또는 열 설정
-### Series, DataFrame의 행 열, 정보 얻기
+
+
+
+
+# 4. Series, DataFrame의 행 열, 정보 얻기
 1. pd.head() ,(DataFrame 전용) pd.info() , pd. ... 아 시발ㅈ 같은 onedrive
 
 2. obj[~].describe() / obj.loc[~].describe()
@@ -257,7 +273,13 @@
     + DataFrame.loc[행이름].fillna=번호
 4. sort_values(by='',ascending=True/False): 내가 봤을 때는 Seriese에서 value값을 정렬하는 것 같다. DataFrame에서는 잘 안 됨.
 
-### 행, 열의 값 정보 얻기 
+
+5. DataFrame객체.iterrows() : 열이 아닌 각 행의 모든 값들을 시리즈로 리턴한다.
+    - parameter : 없어도 됨
+    - Return : 1. 행의 index 2. 해당 열의 value가 행 기준인 데이터
+
+
+# 5. 행, 열의 값 정보 얻기 
 1. DataFrame.value_counts(Argument): 행또는 열에 있는 value의 개수를 셈. (아직 가능한 지는 모르겠음..Series객체만 가능했음,.)
     + DataFrame['열이름'].value_counts() : 가장 정확하게 가능한 형태. 
     - 인자
@@ -297,11 +319,13 @@
         print(None)
     ```
 2. .dtypes : 각 행에 대한 data value의 객체 타입을 출력한다.
-### index 
+
+
+# 6. index 
 1. DataFrames.columns : 속성값이며, 열 인덱스 값을 가져와 인덱스 타입을 반환. value 값은 int,str,float 로 다양할 수 있음.
 2. DataFrames.index : 속성값이며 , 행 인덱스 값을 겨자와 인덱스 타입을 반환.
 
-### add,sub,div,sum,mean ..
+# 7. add,sub,div,sum,mean ..
 
 1. DataFrame/Series.sum(Argument) : 값이 있거나, 1(True)인 값을 출력한다.
 
@@ -309,7 +333,7 @@
 
 3. (Series 전용) obj.sum : 시리즈 객체 안에 원소를 모두 더하고 int OR float 타입을 리턴한다.
 
-### 필터링(매우매우매우 중요!!!!!)
+# 8. 필터링(매우매우매우 중요!!!!!)
 
 - 설명 : 원하는 조건식이 있을때 꾿이 if문을 쓰지 않고 함수를 이용해서 찾기. (유용하긴함 NaN값 바로 찾음 ㅋ)
 
