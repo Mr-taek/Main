@@ -6,7 +6,11 @@
         - facecolor : 바탕색,'red,green,blue..'등 있음
         - edgecolor
         - tight_layout : bool or dict,
-2. plt.close(figure객체) : 많은 figure 생성시 사용. 닫아야만 메모리 공간이 저장된다
+
+2. plt.subplot()
+
+3. plt.close(figure객체) : 많은 figure 생성시 사용. 닫아야만 메모리 공간이 저장된다
+
 
 1. figure객체.add_subplot()
     - parameter
