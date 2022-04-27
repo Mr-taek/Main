@@ -17,10 +17,12 @@
     1. F1 or CTRL+SHIFT+P
     2. git: create new branch 택
     3. 브랜치 이름정하기.
-# Note , 만약 가상환경설치가 다 됐는데 import 후 해당 lib가 없다면 interpreter을 가상환경의 것으로 바꾸었는 지 체크한다.
+# Note , 만약 가상환경설치가 다 됐는데 import 후 해당 lib가 없다면 interpreter을 가상환경의 것으로 바꾸었는 지 체크한다. 이 오류는 pip의 버전이 맞지 않기 떄문이라고 한다. pip install --upgrade pip 해주면 될 것같은데 안 된다.
+
 # VS CODE 가상환경 만드는 법과 접속법. 설치할 폴더위치에서 vscode를 run
+- 가상환경 만드는법 (POWERSHELL) :python -m venv --system-site-packages .\TF[.\은 바로 상위폴더에,나는 바탕화면에서 VSCODE 켜서 바탕화면에 생성]
 - 가상환경 만드는 법 (Through vs code)
-    1. CTRL + SHIFT + P 로 우선 python interpreter check, and 가상환경의 python interpreter가 없는 지 체크.
+    1. CTRL + SHIFT + P 로 우선 python interpreter check, and 가상환경의 python interpreter가 없는 지 체크. 반드시 vscode로 다운받을거면 python inter~가 anaconda가 아닌 걸로 선택해야한다. 아나콘다로 다운받으면 아래 오류를 범하게 될 수도 있는데 해결은 삭제후 다시 이 스탭이다.
     2. cmd prompt 에서 " python -m venv Name 을 적어준다. 그러면 해당 폴더에 Name의 venv폴더가 등장한다.
     3. F1 or ctrl+shift+p 로 select python interpreter 설정을 보면 Name의 python interpreter가 등장한다.
     4. TERMINAL은 POWERSHELL이 아니라 CMD 커맨드를 통해 작동시킨다. 만약 POWERSHELL로 하면 오류 구문이 등장한다. 그게 아닌 일반환경으로 다시 변경해서 작동하면 정상.
@@ -45,6 +47,10 @@
 - 가상환경 나가는 법
     1. 가상환경이 켜진 상태에서 deactivate 를 친다.
     2. 그러면 마지막 Path가 Scripts인 상태에 앞에 (~)가 사라진다. 그 상태에서 다시 activate 하면 가상환경에 진입한다.
+# Fatal error in launcher 시 cmd에 python -m pip~ 으로 하면 해결이다. 실제로 python -m pip --upgrade pip 하면 가상환경도 결국 원래 환경을 가져온 것임으로 가상안에서라도 적용이 된다.더불어 pip도 라이브러리이다.
+
+# 가상환경에서 library가 sll/ts 것 때문에 설치되지 않는다 에러 : 이 글을 쓰는 시점에선 아나콘다와 vs의 스파이더/파이썬 을 동시에 사용해서 문제가 되었다. 가상환경 폴더에 pyvenv.cfg 을 찾으면 home이 있다. 그곳은 anaconda의 파이썬을 실행시키는 파일인데, 아나콘다를 열면 아마 실행이 될 것이다. 하지만 나는 그게 아님으로 이 주소를 일반 python.exe가 있는 폴더 경로를 써주면 된다. C:/user/anaconda3 에서 c~ \python\python310으로 옮겼더니 설치가 된다.
+
 # 파일과 github 연동방법
     1. github에서 새로운 나의 repository를 만든다
     2. 해당 repository에 들어가서 code를 누르고 clone에서 해당 repository의 주소를 복사한다.
