@@ -257,7 +257,7 @@
         1. axis=0(default)/1 : 행또는 열중 삭제할 것
         2. labels=Single/list-like RowIndexORcolumn index : 제거할 행 또는 열 설정
 
-
+14. .apply(), 
 
 
 # 4. Series, DataFrame의 행 열, 정보 얻기
