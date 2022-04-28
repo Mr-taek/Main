@@ -21,6 +21,9 @@
 
 # VS CODE 가상환경 만드는 법과 접속법. 설치할 폴더위치에서 vscode를 run
 - 가상환경 만드는법 (POWERSHELL) :python -m venv --system-site-packages .\TF[.\은 바로 상위폴더에,나는 바탕화면에서 VSCODE 켜서 바탕화면에 생성]
+- 가상환경 만드는법 (anaconda)
+-   1. anaconda prompt에 conda create -n name python=versionNumber
+-   2. conda activate name 하면 ㅇㅋ.
 - 가상환경 만드는 법 (Through vs code)
     1. CTRL + SHIFT + P 로 우선 python interpreter check, and 가상환경의 python interpreter가 없는 지 체크. 반드시 vscode로 다운받을거면 python inter~가 anaconda가 아닌 걸로 선택해야한다. 아나콘다로 다운받으면 아래 오류를 범하게 될 수도 있는데 해결은 삭제후 다시 이 스탭이다.
     2. cmd prompt 에서 " python -m venv Name 을 적어준다. 그러면 해당 폴더에 Name의 venv폴더가 등장한다.
