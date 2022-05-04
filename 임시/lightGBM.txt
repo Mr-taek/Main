@@ -1,0 +1,88 @@
+from sklearn.model_selection import train_test_split
+from sklearn.metrics import accuracy_score, precision_score, recall_score, roc_auc_score
+from sklearn.metrics import f1_score, confusion_matrix, precision_recall_curve, roc_curve
+from sklearn.preprocessing import StandardScaler, Binarizer
+from sklearn.linear_model import LogisticRegression
+def get_clf_eval(y_test, y_pred):
+    confusion = confusion_matrix(y_test, y_pred)
+    accuracy = accuracy_score(y_test, y_pred)
+    precision = precision_score(y_test, y_pred)
+    recall = recall_score(y_test, y_pred)
+    F1 = f1_score(y_test, y_pred)
+    AUC = roc_auc_score(y_test, y_pred)
+    
+    print('오차행렬:\n', confusion)
+    print('\n정확도: {:.4f}'.format(accuracy))
+    print('정밀도: {:.4f}'.format(precision))
+    print('재현율: {:.4f}'.format(recall))
+    print('F1: {:.4f}'.format(F1))
+    print('AUC: {:.4f}'.format(AUC))
+path=r"C:\Users\user\Desktop\santander-customer-transaction-prediction\sample_submission.csv"
+path1=r"C:\Users\user\Desktop\santander-customer-transaction-prediction\train.csv"
+path2=r"C:\Users\user\Desktop\santander-customer-transaction-prediction\test.csv"
+from lightgbm import LGBMClassifier as lgb
+data=pd.read_csv(path)
+train=pd.read_csv(path1,index_col="ID_code")
+
+test=pd.read_csv(path2)
+# print(train["target"].value_counts())
+t_label=train["target"]
+t_data=train.drop("target",axis=1)
+pca=PCA(100)
+t_data=pca.fit_transform(t_data)
+
+from sklearn.model_selection import train_test_split as tts
+x_train,x_test,y_train,y_test=tts(t_data,t_label,test_size=0.2,random_state=1)
+
+lgbm=lgb(n_estimators=400)
+evals=[(x_test,y_test)]
+lgbm.fit(x_train,y_train,early_stopping_rounds=100,eval_metric="logloss",eval_set=evals,verbose=True)
+# preds=lgbm.predict(x_test)
+pre=lgbm.predict(x_test)
+pred=lgbm.predict_proba(x_test)[:,1] # 이건 왜 있는거야.? probability를 뜻하네.
+get_clf_eval(y_test,pre)
+
+# 2.pca로 2차원줄여서 scatter 해보기. 개판이긴 함.
+
+from sklearn.model_selection import train_test_split
+from sklearn.metrics import accuracy_score, precision_score, recall_score, roc_auc_score
+from sklearn.metrics import f1_score, confusion_matrix, precision_recall_curve, roc_curve
+from sklearn.preprocessing import StandardScaler, Binarizer
+from sklearn.linear_model import LogisticRegression
+def get_clf_eval(y_test, y_pred):
+    confusion = confusion_matrix(y_test, y_pred)
+    accuracy = accuracy_score(y_test, y_pred)
+    precision = precision_score(y_test, y_pred)
+    recall = recall_score(y_test, y_pred)
+    F1 = f1_score(y_test, y_pred)
+    AUC = roc_auc_score(y_test, y_pred)
+    
+    print('오차행렬:\n', confusion)
+    print('\n정확도: {:.4f}'.format(accuracy))
+    print('정밀도: {:.4f}'.format(precision))
+    print('재현율: {:.4f}'.format(recall))
+    print('F1: {:.4f}'.format(F1))
+    print('AUC: {:.4f}'.format(AUC))
+path=r"C:\Users\user\Desktop\santander-customer-transaction-prediction\sample_submission.csv"
+path1=r"C:\Users\user\Desktop\santander-customer-transaction-prediction\train.csv"
+path2=r"C:\Users\user\Desktop\santander-customer-transaction-prediction\test.csv"
+
+data=pd.read_csv(path)
+train=pd.read_csv(path1,index_col="ID_code")
+
+test=pd.read_csv(path2)
+# print(train["target"].value_counts())
+t_label=train["target"]
+
+t_data=train.drop("target",axis=1)
+pca=PCA(2)
+pca_t=pca.fit_transform(t_data)# numpy array
+import matplotlib.pyplot as plt
+pcax=pca_t[:,0]
+pcay=pca_t[:,1]
+
+marker0=[t_label==0]
+marker1=[t_label==0]# t_label이 지금 넘파이 어레이를 참조받았기 때문에 얘는 열 이름 따윈 없어~, 그래서 이렇게 함.
+print(marker0)
+plt.scatter(pcax[marker0],pcay[marker1])
+plt.show()
