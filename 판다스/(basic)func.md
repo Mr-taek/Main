@@ -114,7 +114,7 @@
          2. bins : ndarray,intervallindex타입 리턴.retbins 인자가True일 때만 반환된다.
      ```
     data=sns.load_dataset('titanic')
-    data.dropna(axis=0,subset=['age'],inplace=True)
+    data.na(axis=0,subset=['age'],inplace=True)
     count,nn=np.histogram(a=data['age'],bins=4,density=True)
     bbc=['하','중','상','최상']
     data['new']=pd.cut(x=data['age'],bins=nn,labels=bbc,include_lowest=True)
@@ -213,6 +213,8 @@
 4. .drop_duplicates(arg): 중복에 해당되는 모든 행을 제거한다.
     - 반환 : DataFrame
     - 인자 : 3번, .duplicated와 동일
+        1. subset : dataFrame의 column 이름이 옴. 이들을 기준으로 만약 같은 행에 선택된 column들이 모두 같으면 삭제.
+        2. keep : first/last/False , first인 경우 1번행이 "kbs"이고 2번 행이 "kbs"이면 2번행을 삭제. last인 경우는 1번행을 삭제. False는 몰라.
 
 5. .round() : 반올림
     - 인자
