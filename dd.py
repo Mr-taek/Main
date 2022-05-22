@@ -247,3 +247,23 @@
 # print(a(c))
 
 # 
+
+from unittest import TestProgram
+
+
+dic={"TP":25,"FN":15,"FP":35,"TN":25}
+
+accuracy=dic["TP"]/sum([dic[x] for x in dic])
+precision=dic["TP"]/(dic["FP"]+dic["TP"])
+recall=dic["TP"]/(dic["FN"]+dic["TP"])
+f1score=2*(precision*recall)/(precision+recall)
+fpr=dic["FP"]/(dic["FP"]+dic["TN"])
+SENSITIVITY=dic["TP"]/(dic["TP"]+dic["FN"])
+
+# TestProgramSPECIFICITY(TNR)
+
+
+if __name__=="dd":
+    print("Dd")
+elif __name__=='__main__':
+    print("main")

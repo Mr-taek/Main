@@ -4,3 +4,6 @@
 
 - Pandas 사용시 필수 숙지사항
 1. pandas의 column들은 Numpy type이다. 따라서 values을 조정할 때 특히 type에 관해서는 엄격하게 Numpy 규칙을 따른다.
+
+
+2. .columns , .index 는 원래 파일을 참조한다. 따라서 객체.index=~ 하면 원래 주소인 객체의 index가 바뀌는 결과를 낳는다. columns도 마찬가지이다.

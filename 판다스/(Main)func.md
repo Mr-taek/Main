@@ -58,8 +58,9 @@
             - 설명 : 리스트를 시리즈로 변환할 때는 딕셔너리처의 키처럼 인덱스로 변활될 값이 없으므로 인덱스르 별도지정하지 않는 한 디폴트인 정수형 위치 인덱스가 자동 지정된다.
         - 
     - 함수
-        1. .index : 시리즈 객체의 인덱스를 모두 리턴
-        2. .values : 인덱스와 대응 되는 원소를 모두 리턴
+        1. .index : Series/DataFrame의 행(index) 이름만 모두 리턴. 단, 리턴된 것은 원래 Series/DataFrame의 데이터를 복사아닌 참조한다.
+        2. .values : index와 column 이름을 모두 빼고 ndarray타입 2차원 배열 로 값들만 보여줌
+        3. .columns :  DataFrmame의 열 이름만 모두 리턴. 단, 리턴된 것은 원래 DataFrame의 데이터를 복사아닌 참조한다.
 
 2. DataFrame : 여러 Series 객체를 붙여 놓은 것으로 생각해도 되는 데이터 타입
     - 설명 : 판다스의 데이터프레임 자료구조는 R의 데이터프레임에서 유래했다고 알려 짐.
@@ -256,7 +257,36 @@
     - 인자
         1. axis=0(default)/1 : 행또는 열중 삭제할 것
         2. labels=Single/list-like RowIndexORcolumn index : 제거할 행 또는 열 설정
-
+    - 특징 : 확실한 것은 , index를 처음부터 지정해주는 것이 for문으로 제거하는 것보다 훨씬 빠르다.
+    - 응용
+        1. mask사용 행 삭제
+        ```
+        k=data.isnull() # null이 있는 자리는 다 마스크처리.
+        remove=[]
+        for i in k.columns:
+            count=data[i].values_counts(normalize=True,dropna=False)
+            if count[0]<0.85: # series를 리턴하니까 NULL의 비율이 0.85이하라는건 나머지가 다 NULL라는것.
+                remove.append(col)
+        for i in remove:
+            index=k[i].index
+            data.drop(index,axis=0,inplace=True)
+        ```
+        2. for 사용해서 삭제(엄~청 느림 1번은 1초,얘는 2~3분 최소)
+        ```
+        k=data.isnull()
+        remove=[]
+        for col in k.columns:
+            count=k[col].value_counts(normalize=True,dropna=False)
+            if count[0]<0.85: # series를 리턴하니까 NULL의 비율이 0.85이하라는건 나머지가 다 NULL라는것.
+                remove.append(col)
+        count=0
+        for i in remove: # remove 안에 삭제할 열 지정
+            for j, v in enumerate(k[i]): # 삭제할 열 마스크로 찾기.
+                if v==True:
+                    #print(count+1,j)
+                    data.drop(labels=j,axis=0,inplace=True)
+                    #count+=1
+        ```
 14. .apply(), 
 
 
@@ -280,24 +310,26 @@
 
 
 # 5. 행, 열의 값 정보 얻기 
-1. DataFrame.value_counts(Argument): 행또는 열에 있는 value의 개수를 셈. (아직 가능한 지는 모르겠음..Series객체만 가능했음,.)
+1. DataFrame.value_counts(Argument): 행또는 열에 있는 value의 개수를 셈. (아직 가능한 지는 모르겠음..Series객체만 가능했음,. DF도 가능. 근데 무슨소린지 이해는 안 감)
+    + 연계 함수 : obj.isnull() : 모든 자리를 null인지 아닌 지를 기준으로 True False로 나눔.
     + DataFrame['열이름'].value_counts() : 가장 정확하게 가능한 형태. 
     - 인자
-        1. normalize
-            - True : 해당 행 또는 열의 1이라는 숫자의 개수, 또는 True/False가 있는 개수
+        1. normalize : 
+            - False(default) : 해당 행 또는 열의 1이라는 숫자의 개수, 또는 True/False가 있는 개수. isnull()의 결과.
             ```
             False    714
             True     177
             Name: age, dtype: int64
             ```
-            - False : 해당 행 또는 열이 1이라는 숫자가 나오는 백분율. 또는 True/False가 나오는 백분율
+            - True : 해당 행 또는 열이 1이라는 숫자가 나오는 백분율. 또는 True/False의 포함 비율(백분율)
              ```
             False    0.801347
             True     0.198653
             Name: age, dtype: float64
             ```
     - 리턴 형태
-        1. Series 타입 객체를 반환한다.
+        1. Series 타입 객체를 반환한다. 따라서 data[0]/[1]로 자리를 불러오기 가능.
+
     - 사용 예시(중요!)
     ```
     from numpy import NaN
@@ -308,15 +340,15 @@
     print(missing.head())
     colum_data=missing.columns
     for col in colum_data:
-    count=missing[col].value_counts(dropna=False,normalize=True)//normalize를 통해 백분율로, 전체 행 데이터중에 해당 데이터가 차지하는 백분율로 나타냄
-    #print(col,": ", ) #print 하기전에 생각해보니 value_counts()로 리턴되는 타입이 Series인지 Dataframe인지 알아야함.
-    # Series면 열이 하나이므로 열의 인덱스가 무의미하니 당연히 행 인덱스로 지정해서 print해야하고, 만약 dataFrame이면 행과 열 둘중 하나를 일단 선택해야했음.
-    #print(count) # Series가 반환됨을 확인
-    # 단순히 print(col,':',count[True])하면 오류가 남. 왜냐하면 True라는 key가 존재하지 않는 Series가 있기 때문임 따라서 예외처리문을 써줌
-    try :
-        print(col,': ',count[True])
-    except:
-        print(None)
+        count=missing[col].value_counts(dropna=False,normalize=True)//normalize를 통해 백분율로, 전체 행 데이터중에 해당 데이터가 차지하는 백분율로 나타냄
+        #print(col,": ", ) #print 하기전에 생각해보니 value_counts()로 리턴되는 타입이 Series인지 Dataframe인지 알아야함.
+        # Series면 열이 하나이므로 열의 인덱스가 무의미하니 당연히 행 인덱스로 지정해서 print해야하고, 만약 dataFrame이면 행과 열 둘중 하나를 일단 선택해야했음.
+        #print(count) # Series가 반환됨을 확인
+        # 단순히 print(col,':',count[True])하면 오류가 남. 왜냐하면 True라는 key가 존재하지 않는 Series가 있기 때문임 따라서 예외처리문을 써줌
+        try :
+            print(col,': ',count[True])
+        except:
+            print(None)
     ```
 2. .dtypes : 각 행에 대한 data value의 객체 타입을 출력한다.
 

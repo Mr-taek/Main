@@ -1,4 +1,12 @@
 1. plt.figure() : 최대 4개의 plot이 가능하다.
+    - figure() 객체의 개수에 따라 나중에 show 할때 객체 개수만큼 뜬다.
+        - ex
+        ```
+        a=plt.figure()
+        b=plt.fugure()
+        plt.show()
+        -> 총 a와 b 두개 등장.
+        ```
     - parameter(다 생략도 가능)
         - NUM : 그림 식별자, 번호/문자열 다 됨. 없으면 default 실행됨
         - figsize : tow-element tuple, width and height in inches of windows

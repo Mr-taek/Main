@@ -3,7 +3,7 @@
 1. pd.read_excel
 2. pd.read_csv(Argument)
     - (오류)'utf-8' codec can't decode byte 0xb3 in position 0: invalid start byte
-        - 설명 : 불러오는 파일의 encoding 설정이 python encoding 설정이 서로 맞지 않으면 발생한다. 한글은 보통 'utf-8' 체계를 사용함. 이 경우에는 encoding='cp949'로 인코딩 인자를 설정하면 된다.
+        - 설명 : 불러오는 파일의 encoding 설정이 python encoding 설정이 서로 맞지 않으면 발생한다. 한글은 보통 'utf-8' 체계를 사용함. 이 경우에는 encoding='cp949'로 인코딩 인자를 설정하면 된다. 참고로 cp949는 파이썬 인코딩방식.
     - 인자
         1. sep='~' : 파일 내 원소를 구분해주는 문자선언.
         2. index_col=number/'문자' : 행 인덱스로 선언할 열을 선택. 열의 순서 번호를 넣어도 되고 열 인덱스 이름을 써줘도 됨.
