@@ -30,6 +30,7 @@
         - .read(4) - > b'
         1. .read(4) : 
 
+<<<<<<< HEAD:pythonLibrary/File,URL관련(os,urllib,file,struct)/FILE_library/README.md
     - example
     1. 한글 파일 읽기 : utf-8의 정체가 궁굼해지는군..
     ```
@@ -60,6 +61,15 @@
         ["1.2,3.2,4.5","5.2,1.2,4.5"]
         ```
 5. with def(value) as _alias_ : 항상 open으로 열고 close로 닫아야 했다. 이걸 동시에 처리해 주는 것이 with이다. 사실상 open 전용이다. 이외에는 뭐 사용이 안 된다.
+=======
+4. file.readline(bytes),readlines() : 파일의 내용을 읽음.
+    1. file.readline() : bytes만큼 읽음.
+    2. readlines() : bytes는 노상관. \n까지도 읽어옴. 원리는 아직 잘..
+        ```
+        
+        ```
+6. with def(value) as _alias_ : 항상 open으로 열고 close로 닫아야 했다. 이걸 동시에 처리해 주는 것이 with이다. 사실상 open 전용이다. 이외에는 뭐 사용이 안 된다.
+>>>>>>> c183d0233670ed4646f018cdf5a36e56732da5b4:File,URL관련(os,urllib,file,struct)/FILE_library/README.md
     - 사용법
         ```
         with open(patn,mode) as f:
@@ -77,4 +87,12 @@
         f.write("weight,height,label\r\n") # csv가 ","을 deli로 잡는 특성을 사용. \r은 Carriage return이다.
         for i in range(20):
             f.wirte("{},{},{}".format(i,i**2,bmi(i,i/2)))
+    ```
+2. n bytes씩 끊어서 읽기
+    ```
+    with open("~.txt","r") as f:
+        while True:
+            k=f.read(3)
+            if not k: # 숫자가 다 있으니 True이니 실행은 안 되고 0이 되는 순간 작동
+                break
     ```
