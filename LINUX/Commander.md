@@ -4,6 +4,7 @@
 # 3. skills, 유저정보확인, 비밀번호 복구(응급복구)
 # 4. Network 지식
 # 5. commander - 리눅스 제공 커맨더
+# 6. Server management and commander
 - 한글은  한글\ 게임\ 1.plplpl 처럼 \을 써줘야 인식하나봄. 근데 꼭 그런 것도 아닌가봄.
 - cd _: _은 경로, 경로를 이동한다
     - e.g
@@ -16,7 +17,7 @@
 - clear : 화면 지우기
 - ip addr : id 정보 출력
 - mv
-
+- dpkg : dpkg -l ,s 설치된 패키지를 체크하는 것.
 - rm : rm -rf root->삭제시 루트파티션삭제로 리눅스재설치, 삭제 커맨더.
 - wget : url에 접속해서 파일이 있으면 다운 받음.
 
@@ -124,6 +125,7 @@
                 2. ls /lib/systemd/system| grep ^h : 서비스의 실행 스크립트 파일이 들어있는 경로이며, 서비스이름.service 만 존재. 현 시점 347개 있음. 
                     - 이 directory 안에 있는 파일 대부분 systemctl 로 명령 가능.
                     - systemctl list-unit-files로 현재 실행중인 서비스 실행 여부 확인.
+                        - 특정 파일 선택 법 : systemctl list-unit-files| grep ^disirable word, 
                         - enable : 사용
                         - disable: 미사용
                         - static : 사용/미사용 설정이 불가, 다른 서비스의 "소켓"에 의존해서 실행됨.
@@ -284,7 +286,7 @@
     - 사용자 커맨더의 존재이유 : 동시에 접속해도 특정 부서에 소속시키는 등의 분류가 필요함. 권한을 주려면 분류가 필요하기 때문임. 자세한 것은 184~185page.
 + 파일 커맨더
 
-
+    0. 현재 존재 그룹/사용자 보기 : getent group/passwd
     1. adduser : 새로운 사용자 추가, /etc/passwd,/etc/shadow,/etc/group 파일에 새로운 행이 추가됨. 그룹 id가 지정되지 않으면 사용자 이름과 같은 그룹 id가 생성되는데, 이는 즉 그룹을 꼭 지정해야 함을 의미한다.
         - adduser newuser1 : newuser1이라는 이름의 사용자생성
         -> 암호생성 -> 재입력 -> 전체이름입력[생략가능] -> 사무실 번호[생략가능] -> 직장번호[생략가능] -> 집번호[생략가능] -> 기타[생략가능] -> 정보가 올바르요? [Y/n] -> y, enter
@@ -294,6 +296,7 @@
         - adduser --shell /bin/csh newuser5 : 기본 셸을 /bin/csh지정
         ## 복수지정도가능.
         - adduser --gid 1997 --uid 1500 lee -> 1997이란 그룹id가 있으면 감. 사전에 미리 만들어둬서 새로운 그룹은 만들어 지지 않음. user id는 1500 이름은 lee로 지정.
+            - 단 , gid, uid 모두 이미 존재해야하나봄. 
 
     2. passwd : 사용자의 비밀번호 변경.
         - passwd newuser1 -> 새 암호, 재입력
@@ -473,6 +476,7 @@
 
 # 4. Network 지식 / 넷트워크 연결 오류 해결
 1. IP 주소 : 넷워크 상에서 컴터를 구분할 때 유일하게 중복되지 않는 식별자.
+1. Port(포트): TCP,UDP 포트의 줄임말. 가상의 논리적 통신 연결변호. IP주소가 정문이면 포트번호는 건물 내부 방번호. 모든 PC엔 0~2^16 만큼의 포트번호가 있음. 일반적으로 0~2^10까지 예약된 포트번호가 많음
 2. DNS
     - 4개의 각 8비트 주소를 갖고 있음.
     - 역할 : URL이름을 IP주소로 변경. 웹에서 https://www.nate.com을 입력시 /etc/resolve.conf 파일에 설절된 DNS서버에 해당 URL의 IP유무를 묻는다. 그리고 DNS 서버가 URL의 IP를 찾아내면 웹에 IP를전송시켜 웹에서 접속이 된다.
@@ -519,3 +523,61 @@
     ```
     ping www.naver.com -> 사용시 연결이 된다면 즉각 반응이 오고, 연결이 안 되면 시간이 오래가면서 결국 암 것도 안 나옴.
     ```
+
+
+# 6. Server USE/management and commander
++ 서버/클라이언트
+    - EX): NAVER, 네이버라는 웹서버가 작동되고 사람들은 웹브라우저 , 즉 웹 클라이언트 프로그램(CHROME, FIREFOX, EXPLOREROR)
+    - 특징
+        1. 서버 접속을 위해선 클라이언트가 필수.
+        2. 서버가 리눅스여도 클라이언트는 달라도 됨. THAT IS, 서버 OS,CLIENT OS는 달라도 됨.
+        3. 단, 서버프로그램은 특정 클라이언트를 원함
+            - 웹 서버 (APACH, IIS), 웹 클라이언트(CHROME,FIREFOX,MOZILLA ..)
+            - 텔넷 서버, 텔넷 클라이언트(TELNET)
+            - FTP SERVER , FTP CLIENT ...
+
+- 텔넷 server : 보안에 취약하고(오래된 방법이라) 인기는 떨어져도 보편적인 원격접속 방법. 요즘은 텔넷에 보안기능을 더해서 사용.
+    - 취약파트 : 서버/클라이언트 사이에 데이터 송수신 중 암호화가 되지 않아 해킹위험에 노출됨. 따라서 아이디/비밀번호 해킹은 매우 단순.
+    - 사용조건
+        1. Lunux server에 텔넷 서버가 설치되었다면, 원격지 Linux server의 PC도 텔넷 클라이언트 프로그램이 설치되어 있어야 한다.
+            - ※그러나 대부분 운영체제에 기본적으로 텔넷클라이언트 프로그램이 내장되어 있어서 큰 문제는 없을 것.
+    - 설치과정: #4를 참고
+        1. dpkg ls telnetd : 텔넷 패키지 설치 여부 확인. 처음에는 없음
+        2. apt -y install xinetd telnetd
+        ##### telnet서버 가동 설정 과정
+        3. cd /etc/xinetd.d
+        4. touch telnet
+        5. telnet을 nano/gedit같은 걸로 열기
+        6. 아래와 같이 작성한다
+        ```
+        service telnet
+        {
+                disable=no
+                flags=REUSE
+                socket_type=stream
+                wait=np
+                user=root
+                server=/usr/sbin/in.telnetd
+                log_on_failure +=USERID
+        }
+        ```
+        7. adduser teluser, 비번은 teluser지정하면 나머지는 default
+            - groupadd --gid 1997 telnetork
+            - adduser --gid 1997 teluser
+        8. systemctl status xinetd , 액티브상태가 active(running)임을 확인.
+        9. systemctl restart xinetd
+        10. systemctl status xinetd, 액티브는 그대로인데 아래 빨간 줄이 나온 것이 확인된다.
+        11. ufw allow 23/tcp, 방화벽에서 텔넷에게 23번 포트를 허용. 포트는 넷트워크 용어 확인
+        12. 
+- OpenSSH server : 리눅스에서 지원하는 서버, TELNET의 취약점이 보완된 서버이다. 보안강화된 TELNET 서버도 있으나 실무에선 SSH서버를 많이 사용한다.
+    - 설치과정 : #4를 참고
+        1. system restart ssh
+        2. systemctl list-unit-files | grep ^ss : 서비스의 상태 확인.
+            - ssh.service : enable
+            - ssh@.service : static
+            - sshd.service : enable , systemctl disable ssh 하면 사라지는 것 이유는 모름
+            - ssh.socket : disable
+        3. systemctl enable ssh
+        4. systemctl status ssh : 3번과정이 없어도 enable이었음. enable 이라고 초록색이 등장.
+        5. ufw allow 22/tcp : 방화벽에서 ssh의 포트인 22번을 허용
+- XRDP SERVER : 그래픽지원이 가능한 장점이 있음
