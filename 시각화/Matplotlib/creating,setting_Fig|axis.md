@@ -99,6 +99,16 @@
                     - axis : 'x'/'y' , 특정 축에만 grid를 생성할지의 여부. 없으면 x,y둘다 생성된다
                     - linewidth : grid의 선 두깨를 조절한다.
                     - linestyle : ":"/"-."/"--"/"-" , 4가지 라인스타일로 grid 그리기가 가능하다 
+                    - color : color모음 확인, grid의 색을 결정한다.
+                    - which : "major"/"minor", .x/yticks()에서 minor=True/1이 된 다음, minor로 지정된 ticks에 적용되는 grid가 만들어 진다.
+            3. grid의 격자를 좁히고 싶다면 set_?ticks()를 사용해서 grid의 폭을 조정해야한다.
+            
+            4. 
+                    
+                    
+                    
+                    
+                    
         - 비적절한 내용 다른 곳으로 옮겨야함. plot에 더 적절한 내용들 -----
         1. axis객체.vlines(y축의center지점(2D->(,),3D->(,,),Y축의MIN,Y축의MAX,colors=color설명란참고) : 그래프의 수직선을 긋는다
         2. axis객체.hlines(x축의center지점(2D->(,),3D->(,,),x축의MIN,x축의MAX,colors=color설명란참고) : 그래프의 수평선을 긋는다
