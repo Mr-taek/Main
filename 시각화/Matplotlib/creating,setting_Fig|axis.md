@@ -30,14 +30,27 @@
 
         2. fig,axex=plt.subplots(nrows=default 1,ncol?=default 1) : norws는 한 개의 figure에 몇개의 행을 만들 것이란 의미이다. fig하나와 해당 fig에 포함되는 axis 를 리턴한다.            - parameters : 아래것을 제외한 모두 1번 .figure()의 것과 동일하다.
     - 그래프 축/눈금(axis/tick) 다루기
-        1. axis객체.spines["right"/"left"/"top"/"bottom"]: axis의 상하좌우 축의 객체를 value로 포함하는 dict. 
+        1. axis객체.spines["right"/"left"/"top"/"bottom"]: axis의 상하좌우 축의 객체를 value로 포함하는 dict.
+            - 사용 요령 : dict객체임으로 axis객체.spines.items()로 
             - 함수
                 1. .set_visible(True(default)/False) : 선택된 축의 보이기 여부를 결정한다
                 2. .set_linewidth(number) : 축의 두께를 변경한다
-                3. .set_position("center"/?) : 축의 위치를 변경한다
+                3. .set_position("center"/("axis"/"data",비율)) : 축의 위치를 변경한다. ("axis",0)은 축의 비율상 중심에 맞춤을 의미하며,("data",0)은 눈금글씨의 데이터의 기준으로 중심을 맞춤을 의미한다 따라서 y축의 1에 맞추고 싶다면 axis.spines["bottom"].set_position(("data",1))로 맞춘다
                 4. .set_alpha(0.0~1.0) : 축의 투명도를 변경한다
                 5. .set_color(color) : 축의 색을 변경한다
                 6. 
+             - e.g : 일반적인 sin파형 그래프 만들기
+                ```
+                wavelength=np.arange(-10,10,1)
+                sine=np.sin(wavelength)
+                fig,axes=plt.subplots()
+                axes.spines["right"].set_visible(False)
+                axes.spines["top"].set_visible(False)
+                axes.spines["left"].set_position("center")
+                axes.spines["bottom"].set_position("center")
+                axes.plot(wavelength,sine)
+                plt.show()
+                ```
         2. axis객체.tick_params() : tick은 눈금을 의미한다. 눈금을 조절한다
             - parameters
                 1. axis = "x"/"y" , defalult=x,y. 눈금 파라미터를 적용시킬 축을 정한다. 없으면 아래의 모은 parameter는 두개 축에 적용된다
@@ -51,7 +64,8 @@
                 8. rotation : degree, 눈금 글씨(label)의 글씨 회전. 180은 글을 반대로 돌리기, 90은 생각에 맡김. +는 반시계 -는 시계
                 9. color : 눈금선의 색, 없으면 clolrs의 색을 따라감.
                 10. colors : 눈금 글씨(label)의 색
-                
+                11. direction : in/out(default) , 눈금선이 뻗치는 방향
+                12. which : 주("major") 눈금과 조("minor") 눈금을 지정한다.
          3. axis객체.xticks, axis객체.yticks : x,y축에 들어가는 값을 넣어주기. np.arange나 list안에 있는 값이 해당 축에 값으로 반영된다. 반드시 number(int,float)만 가능하다
             - 주 눈금(major)과, 주 눈금 사이에 작은눈금(minor) 만들기
                 ```
@@ -75,6 +89,9 @@
                 ```
              - parameters
                 1. ha(horizontal alignment) : center/right/left, 세팅한 글의 위치를 조정하기. center는 눈금 중앙과 일치, right는 글 오른쪽을 눈금선에 맞추기, left는 글 왼쪽을 눈금선에 맞추기
+          6. axis객체.set_xscale()/.set_yscale() : 값이 10000000000 , 100000000002 .... 이렇게 되면 크기가 너무커서 figure에 표현이 어렵다. 따라서 값의 크기(scale)을 조정하는 작업인 scaling이 필요하다.
+            - parameters
+                1. "log"
         - 비적절한 내용 다른 곳으로 옮겨야함. plot에 더 적절한 내용들 -----
         1. axis객체.vlines(y축의center지점(2D->(,),3D->(,,),Y축의MIN,Y축의MAX,colors=color설명란참고) : 그래프의 수직선을 긋는다
         2. axis객체.hlines(x축의center지점(2D->(,),3D->(,,),x축의MIN,x축의MAX,colors=color설명란참고) : 그래프의 수평선을 긋는다
