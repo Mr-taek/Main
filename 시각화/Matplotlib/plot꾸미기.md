@@ -1,12 +1,3 @@
-# 색상 마커 선 스타일
-
-1. plt.plot(x,y,linestyle='--',color='g',marker='o')
-    - parameter
-        1. color : 'r''g''b'
-        2. linestype='dashed','--'
-        3. marker='o'
-        4. drawstyle='steps-post'
-        5. label='name'
 
 2. plt.legend()
 
