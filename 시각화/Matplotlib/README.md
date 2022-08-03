@@ -1,4 +1,4 @@
-1. Worked by 64bit 
+1. Working with 64bit 
 
 - plt.savefig()
     - parameter
