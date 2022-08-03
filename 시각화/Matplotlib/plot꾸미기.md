@@ -1,6 +1,4 @@
 
-2. plt.legend()
-
 # 눈금 라벨 범례
 
 - 그래프를 꾸미는 방법은 크게 2가지.
@@ -13,17 +11,6 @@
     subplot.plot(np.random.randn(1000).cumsum())
     plt.show()
     ```
-
-### x축의 눈금을 변경하기 위한 가장 쉬운 방법
-1. ax.set_xticks([0,250,500,750,1000]) : x축의 scale을 지정
-
-1. ax.set_xticklabels(['one','two','three','four','five'],rotation=30,fontsize='small') : font는 문자열의 특징을 말한느 것.
-
-1. ax.set_title('My first matplotlib plot')
-
-1. ax.set_xlabel('Stages')
-
-### 범례 추가하기
 
 1. ax.legend(loc='best')제일 쉬운 방법, 각 그래프에 label parameter 입력
     - parameter
