@@ -1,9 +1,15 @@
-1. figure객체.plot(),add_subplot객체.plot : plt.plot은 가장마지막에 등장한 subplot을, add~객체는 특정 subplot을 지정
+1. axis객체.plot():
     - parameter
-        1. x,y : array-like or scalar. x vlaue는 옵션이며 없을 시 default로 len(y) 이다. 그런데 x,y는 굳이 써주지 말고
-        ax3.plot(np.arange(0,50),np.random.randn(50)) 이렇게 해야 오류가 안남
-        2. fmt : str, 옵션이다. format string 자리임.라인 꾸미기에 사용됨. 라인 특성의 축약형임.
-        3. data : 
+        1. x:
+        2. y:
+        3. (zs) : 만약 add_subplot(projection="3d")일 때 사용된다. 이 경우 x와 y에 모두 s를 붙여준다
+        4. fmt : str, 옵션이다. format string 자리임.라인 꾸미기에 사용됨. 라인 특성의 축약형임.
+        5. data : ??
+        6. color : 'r''g''b', 또는 바탕화면 색 이름 참고
+        7. linestype : 'dashed','--'
+        8. marker : 'o'
+        9. drawstyle='steps-post'
+        10. label : 해당 plot객체의 이름이다. 나중에 .legend()할 때 필수이다
 
 2. figure객체.hist()
     - parameter
@@ -21,7 +27,7 @@
         ax1.hist(data)
         plt.show()
         ```
-2. plt.scatter()
+2. axis객체.scatter()
     - EX)
         ```
         fig, (ax1,ax2,ax3) = plt.subplots(1, 3,sharex=True)
