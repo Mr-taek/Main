@@ -31,8 +31,8 @@
 
         2. fig,axex=plt.subplots(nrows=default 1,ncol?=default 1) : norws는 한 개의 figure에 몇개의 행을 만들 것이란 의미이다. fig하나와 해당 fig에 포함되는 axis 를 리턴한다.
     - 그래프 축 다루기
-        3. axis객체.vlines(y축의center지점(2D->(,),3D->(,,),Y축의MIN,Y축의MAX,colors=color설명란참고) : 그래프의 수직선을 긋는다
-        3. axis객체.hlines(x축의center지점(2D->(,),3D->(,,),x축의MIN,x축의MAX,colors=color설명란참고) : 그래프의 수평선을 긋는다
+        1. axis객체.vlines(y축의center지점(2D->(,),3D->(,,),Y축의MIN,Y축의MAX,colors=color설명란참고) : 그래프의 수직선을 긋는다
+        2. axis객체.hlines(x축의center지점(2D->(,),3D->(,,),x축의MIN,x축의MAX,colors=color설명란참고) : 그래프의 수평선을 긋는다
     - 그래프 여닫기
         1. plt.show() : 지금까지 생성된 모든 fig 객체를 show한다
         2. plt.close() : 지금까지 생성된 모든 fig 객체의 메모리를 해제한다. show하고나서 다음에 또 fig가 나올게 있으면 반드시 해줘야한다.
