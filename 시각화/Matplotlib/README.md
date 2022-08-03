@@ -1,5 +1,6 @@
 1. Working with 64bit 
 
+- Available colors
 ![화면 캡처 2022-08-03 154647](https://user-images.githubusercontent.com/77142512/182542421-f6c639bd-d283-44d1-9619-a772839706ed.png)
 
 
