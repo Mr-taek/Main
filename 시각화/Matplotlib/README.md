@@ -1,5 +1,8 @@
 1. Working with 64bit 
 
+![화면 캡처 2022-08-03 154647](https://user-images.githubusercontent.com/77142512/182542421-f6c639bd-d283-44d1-9619-a772839706ed.png)
+
+
 - plt.savefig()
     - parameter
         1. fname : file Path, format parameter가 지정되어도 반드시 확장자를 지정해야함. .pdf,.png 등이 있음.
