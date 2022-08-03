@@ -12,16 +12,24 @@
 1. plt.hist()
     - parameter
         1. x_array : 1/2차원 까지 됨. 2차원은 무슨 뜻인지 모르겠음. 아무튼, 1차원 안에 값의 개수를 자동으로 계산, x축은 등장 값, y축은 등장 값의 횟수
-# 차트 제목, 축 이름
-1. plt.title()
+# 그래프의 설명란 다루기
+1. fig.set_title() : x축 제목 만들기
 
-2. plt.xlabel('str') , plt.ylabel('str') : x축 y축 이름 만들기.
+2. axis.set_xlabel('str') , axis.set_ylabel('str') : x축 y축 이름 만들기.
+3. 축 설정하기
+   1. axis객체.spines["right"/"left"/"top"/"bottom"].set_visible(True(default)/False) : axis의 좌우상하의 line의 visible을 선택한다
+   2. axis객체.tick_params(labelleft=True(default),labelbottom=True(default),left=True(default),bottom=True(default))
+4. 글자 넣기
+    1. axis객체.text(그래프의x위치,y위치,넣을글씨,글씨크기["large"]
+# 그래프의 틀
+    - 그래프 만들기
+        1. obj= plt.figure() : 그래프의 틀 정보 설정, figure()자체가 하나의 메모리 주소이다. 해당 figure객체로부터 발생한 axes들은 원래의 figure에 포함된다
+            - axis=obj.add_subplot() : figure객체의 메모리 주소를 담은 axis을 만드는 방법. 주로 projection="3d"할 때 이렇게 사용했다
+        2. fig,axex=plt.subplots(nrows=default 1,ncol?=default 1) : norws는 한 개의 figure에 몇개의 행을 만들 것이란 의미이다. fig하나와 해당 fig에 포함되는 axis 를 리턴한다.
+    - 그래프 축 다루기
+        3. axis객체.vlines(y축의center지점(2D->(,),3D->(,,),Y축의MIN,Y축의MAX,colors=color설명란참고) : 그래프의 수직선을 긋는다
+        3. axis객체.hlines(x축의center지점(2D->(,),3D->(,,),x축의MIN,x축의MAX,colors=color설명란참고) : 그래프의 수평선을 긋는다
 
-# 그래프의 틀, 
-
-1. obj= plt.figure() : 그래프의 틀 정보 설정.
-
-2. ...
 
 # (중요) axe 객체 : plt.figure에서 만들어진 그래프 틀을 기반으로 다양한 plot객체를 생성하는데, 여기서 만드는 객체를 axe객체라 함.
 1. 사용법
