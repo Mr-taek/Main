@@ -92,6 +92,13 @@
           6. axis객체.set_xscale()/.set_yscale() : 값이 10000000000 , 100000000002 .... 이렇게 되면 크기가 너무커서 figure에 표현이 어렵다. 따라서 값의 크기(scale)을 조정하는 작업인 scaling이 필요하다.
             - parameters
                 1. "log"
+        - 그래프 그리드(grid) 만들기
+            1. 설명 : axis객체.grid()로 사용합니다. ticks(눈금선)을 기준으로 만들어지기 때문에 눈금선이 많을 수록 그리드도 많아집니다
+            2. axis객체.grid()
+                - parameters
+                    - axis : 'x'/'y' , 특정 축에만 grid를 생성할지의 여부. 없으면 x,y둘다 생성된다
+                    - linewidth : grid의 선 두깨를 조절한다.
+                    - linestyle : ":"/"-."/"--"/"-" , 4가지 라인스타일로 grid 그리기가 가능하다 
         - 비적절한 내용 다른 곳으로 옮겨야함. plot에 더 적절한 내용들 -----
         1. axis객체.vlines(y축의center지점(2D->(,),3D->(,,),Y축의MIN,Y축의MAX,colors=color설명란참고) : 그래프의 수직선을 긋는다
         2. axis객체.hlines(x축의center지점(2D->(,),3D->(,,),x축의MIN,x축의MAX,colors=color설명란참고) : 그래프의 수평선을 긋는다
